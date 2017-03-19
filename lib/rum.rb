@@ -19,7 +19,6 @@ class Rum
     @matched = false
     instance_eval(&@blk)
     @res.status = 404  unless @matched || !@res.empty?
-    res['Content-Type'] = "text/html"
     @res.finish
   end
 
@@ -58,21 +57,28 @@ class Rum
     File.open(Dir["views/#{content}\.*"][0]).read
   end
 
-  Tilt.default_mapping.lazy_map.each do |ext, engines|
-    engines.each do |e|
-      begin
-        engine = Object.const_get(e[0])
-      rescue LoadError, NameError => e
-        next
-      end
-      define_method ext do |text, *args|
-        template = engine.new(*args) do
-          find_partial text
-        end
-        locals = (args[0].respond_to?(:[]) ? args[0][:locals] : nil) || {}    # was o[0].try(:[],:locals)||{}
-        res.write template.render(self, locals)
-      end
-      break
+  # Tilt.default_mapping.lazy_map.each do |ext, engines|
+  #   engines.each do |e|
+  #     begin
+  #       engine = Object.const_get(e[0])
+  #     rescue LoadError, NameError => e
+  #       next
+  #     end
+  #     define_method ext do |text, *args|
+  #       template = engine.new(*args) do
+  #         find_partial text
+  #       end
+  #       locals = (args[0].respond_to?(:[]) ? args[0][:locals] : nil) || {}
+  #       res.write template.render(self, locals)
+  #     end
+  #     break
+  #   end
+  # end
+  def markdown(text, *args)
+    template = Tilt::RDiscountTemplate.new(*args) do
+      find_partial text
     end
+    locals = (args[0].respond_to?(:[]) ? args[0][:locals] : nil) || {}
+    res.write template.render(self, locals)
   end
 end
