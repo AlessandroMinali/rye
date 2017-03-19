@@ -4,6 +4,6 @@ use Rack::ContentType
 
 run Rum.new {
   on default do
-    markdown :tilt
+    markdown '#Coming Soon'
   end
 }
