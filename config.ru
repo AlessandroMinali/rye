@@ -9,6 +9,7 @@ run Rum.new {
     when 2; markdown :extra
     when 3; markdown :tilt
     when 4; markdown :deploy
+    when 5; markdown :repo
     else
       res.redirect('/')
     end
