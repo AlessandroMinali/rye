@@ -1,4 +1,4 @@
-##Lesson 1
+###Lesson 1
 
 I'll be going step by step through how the ruby micro-framework [rum](https://github.com/chneukirchen/rum) works using the simplest example I can think of:
 

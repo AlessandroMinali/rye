@@ -1,4 +1,4 @@
-##Lesson 4
+###Lesson 4
 
 Deploying pure racks apps is straight forward and rewarding. I'll be hand holding you through deploying this for **FREE** on heroku.
 

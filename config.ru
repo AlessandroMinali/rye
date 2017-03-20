@@ -20,7 +20,7 @@ run Rum.new {
   on 'help' do
     markdown :help
   end
-  on root do
+  on root? do
     haml :main
   end
   on default do

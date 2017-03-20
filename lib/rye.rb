@@ -51,28 +51,20 @@ class Rum
     }
   end
 
-  def also
-    @matched = false
-  end
-
   def number
     path("\\d+")
-  end
-
-  def param(p, default=nil)
-    lambda { req[p] || default }
-  end
-
-  def params(p, default=nil)
-    req[p] || default
   end
 
   def default
     lambda { res.redirect('/', 301) }
   end
 
-  def root
+  def root?
     env["PATH_INFO"] == '/'
+  end
+
+  def about?
+    env["SCRIPT_NAME"] == '/about'
   end
 
   def find_partial(content)
@@ -84,32 +76,13 @@ class Rum
     end
   end
 
-  # Tilt.default_mapping.lazy_map.each do |ext, engines|
-  #   engines.each do |e|
-  #     begin
-  #       engine = Object.const_get(e[0])
-  #     rescue LoadError, NameError => e
-  #       next
-  #     end
-  #     define_method ext do |text, *args|
-  #       template = engine.new(*args) do
-  #         find_partial text
-  #       end
-  #       locals = (args[0].respond_to?(:[]) ? args[0][:locals] : nil) || {}
-  #       res.write template.render(self, locals)
-  #     end
-  #     break
-  #   end
-  # end
-
   {'haml': Tilt::HamlTemplate, 'markdown': Tilt::RDiscountTemplate}.each do |k,v|
     define_method k do |text, *args, &blk|
       args = [{}] if args.empty?
       layout = args[0].fetch(:layout, :layout)
       if layout
         args[0].merge!(layout: nil)
-        meth = __method__
-        send(:haml, layout.to_sym, *args) { send(meth, text, *args) }
+        haml(layout.to_sym, *args) { send(__method__, text, *args) }
       else
         template = v.new(*args) do
           find_partial text

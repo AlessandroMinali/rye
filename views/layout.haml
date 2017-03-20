@@ -23,21 +23,21 @@
   Diving into the Rum
   Framework
 %a.button{href: '/'} Home
-%a.button{href: '/'}  Repo
+%a.button{href: '//github.com/AlessandroMinali/rye'}  Repo
 %a.button{href: '/about'}  About
 %a.button{href: '/help'}  Help?
 = yield
-- unless root
+- unless root? || about?
   %a.button{href: '/'} Home
-  %a.button{href: '/'}  Repo
+  %a.button{href: '//github.com/AlessandroMinali/rye'}  Repo
   %a.button{href: '/about'}  About
   %a.button{href: '/help'}  Help?
-  %hr
-  Signup to get a notification when the next article is out:
-  %form{ action: 'https://packmule.us8.list-manage.com/subscribe/post', method: 'post' }
-    %input{ type: 'hidden', name: 'u', value:'05df9a2a90aaaa22b906c11d9' }
-    %input{ type: 'hidden', name: 'id', value: 'b7c9b7a5e2' }
-    %input{ type: 'email', name: 'MERGE0', id: 'MERGE0', placeholder: 'Your email here', style: 'width: 100%; margin-bottom: 5px;' }
-    %input{ class: 'button-primary', type: 'submit', value: 'Submit', style: 'width: 100%;' }
+%hr
+Signup to get a notification when the next article is out:
+%form{ action: 'https://packmule.us8.list-manage.com/subscribe/post', method: 'post', style: 'margin-bottom: 0px;' }
+  %input{ type: 'hidden', name: 'u', value:'05df9a2a90aaaa22b906c11d9' }
+  %input{ type: 'hidden', name: 'id', value: 'b7c9b7a5e2' }
+  %input{ type: 'email', name: 'MERGE0', id: 'MERGE0', placeholder: 'Your email here', style: 'width: 100%; margin-bottom: 5px;' }
+  %input{ class: 'button-primary', type: 'submit', value: 'Submit', style: 'width: 100%;' }
 = haml :disqus, layout: nil
 %link{:rel => :stylesheet, :type => :"text/css", href: "//cdnjs.cloudflare.com/ajax/libs/skeleton-framework/1.1.1/skeleton.min.css"}

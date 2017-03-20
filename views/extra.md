@@ -1,4 +1,4 @@
-##Lesson 2
+###Lesson 2
 
 In the [previous tutorial](/lesson/1) I introduced the micro-framework [rum](https://github.com/chneukirchen/rum) and how it works as a [rack](http://rack.github.io) app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as [sinatra](http://www.sinatrarb.com) and [rails](https://rubyonrails.org), which are rack apps themselves. Here is the code we will be breaking down:
 

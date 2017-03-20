@@ -1,4 +1,4 @@
-##Lesson 3
+###Lesson 3
 
 So now that we are masters at understanding how [rum](https://github.com/chneukirchen/rum) works, let's try to customize it with some slick features. In this tutorial I'll be adding the following to rum:
 
