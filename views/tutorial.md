@@ -1,6 +1,6 @@
 ###Lesson 1
 
-I'll be going step by step through how the ruby micro-framework [rum](https://github.com/chneukirchen/rum) works using the simplest example I can think of:
+I'll be going step by step through how the ruby micro-framework <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> works using the simplest example I can think of:
 
     require '../lib/rum'
     run Rum.new {
@@ -9,15 +9,15 @@ I'll be going step by step through how the ruby micro-framework [rum](https://gi
       end
     }
 
-Grab the [rum repo from github](https://github.com/chneukirchen/rum). Save the above code in the  `/sample` folder of the rum repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to [http://localhost:9292](http://localhost:9292) in your browser to see what it does.
+Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. Save the above code in the  `/sample` folder of the rum repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> in your browser to see what it does.
 
-The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to [reach out to me](/about) if you have something you can't figure out!
+The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to <a href="/about" target="_blank">reach out to me</a> if you have something you can't figure out!
 - - -
 Let's start and see how this mirco-framework works!
 
     require '../lib/rum'
 
-We ask ruby to load the rum library from our machine. This goes to rum.rb and loads the [rack](http://rack.github.io) library with `require 'rack'` and setups up our two classes **Rack::Response** and **Rum**.
+We ask ruby to load the rum library from our machine. This goes to rum.rb and loads the <a href="http://rack.github.io" target="_blank">rack</a> library with `require 'rack'` and setups up our two classes **Rack::Response** and **Rum**.
 
     run Rum.new {...}
 Here we pass our app to rack. In the end all rack wants from us is an **object** that responds to `:call` with one parameter and returns an array with three elements:
@@ -53,7 +53,7 @@ As I mentioned above rack's entry point into app is through the `:call` method. 
     def call(env)
       dup._call(env)
     end
-Rum makes a [duplicate](http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup) of itself to avoid carrying over instance variables and the like between requests. With a fresh and clean copy of the **Rum** object we continue processing the call:
+Rum makes a <a href="http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup" target="_blank">duplicate</a> of itself to avoid carrying over instance variables and the like between requests. With a fresh and clean copy of the **Rum** object we continue processing the call:
 
     def _call(env)
       @env = env
@@ -67,7 +67,7 @@ Rum makes a [duplicate](http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup)
       }.call(env)
     end
 
-`env` is holding all the [environment variables](http://www.rubydoc.info/github/rack/rack/master/file/SPEC#The_Environment) that rack provides us, we take a copy as it may be modified elsewhere. We use `Rack::Request` and `Rack::Response` as convenient interfaces to work with rack. `@matched` will become a flag to track if we have found an appropriate route for the incoming request.  `catch(:rum_run_next_app)` is an error handling block that rum provides for one of it's helper methods `:run`, we'll talk about in a later tutorial. For now we are interested in what happens in the block:
+`env` is holding all the <a href="http://www.rubydoc.info/github/rack/rack/master/file/SPEC#The_Environment" target="_blank">environment variables</a> that rack provides us, we take a copy as it may be modified elsewhere. We use `Rack::Request` and `Rack::Response` as convenient interfaces to work with rack. `@matched` will become a flag to track if we have found an appropriate route for the incoming request.  `catch(:rum_run_next_app)` is an error handling block that rum provides for one of it's helper methods `:run`, we'll talk about in a later tutorial. For now we are interested in what happens in the block:
    
     instance_eval(&@blk)
     @res.status = 404  unless @matched || !@res.empty?
@@ -94,7 +94,7 @@ Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return 
     def default
       true
     end
-so we end up with `[true].map { ... }`. Luckily `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets [mapped](https://ruby-doc.org/core-2.2.0/Array.html#method-i-map) back to `*arg`.
+so we end up with `<a href="https://ruby-doc.org/core-2.2.0/Array.html#method-i-map" target="_blank">true].map { ... }`. Luckily `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets [mapped</a> back to `*arg`.
 
 Therefore we have `yield true` which passes `true` to:
   
@@ -139,9 +139,9 @@ A quick summary of things to take away from this code review:
  2. splat (*) can be used to group parameters into an array
  3. creating rack apps is as simple as having an object with `:call(env)` method that returns a 3 element array!
 
-######[Interested in seeing a more complex example? Next Lesson ->](/lesson/2)
+######<a href="/lesson/2" target="_blank">Interested in seeing a more complex example? Next Lesson -></a>
 - - -
 Sources:  
-[https://github.com/chneukirchen/rum](https://github.com/chneukirchen/rum)  
-[http://rack.github.io](http://rack.github.io)  
-[https://github.com/rack/rack](https://github.com/rack/rack)  
+<a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  
+<a href="http://rack.github.io" target="_blank">http://rack.github.io</a>  
+<a href="https://github.com/rack/rack" target="_blank">https://github.com/rack/rack</a>  

@@ -5,14 +5,14 @@ Deploying pure racks apps is straight forward and rewarding. I'll be hand holdin
 - - -
 
 - 1: make a **free** heroku account. This will allow you to spin up as many projects as you want for anyone to use. The only limitation is how much up-time your website will have. It'll sleep every 30 minutes and heroku caps activity at a certain amount of hours. Still pretty good for small projects to share with friends.  
-[Make an account](https://signup.heroku.com/dc)
+<a href="https://signup.heroku.com/dc" target="_blank">Make an account</a>
 
 - 2: Download and install heroku tools for the command line.  
-[Heroku CLI Download](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+<a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank">Heroku CLI Download</a>
 
 - 3: Setup up your local enivorment with heroku.  
 Run `heroku login` and enter your credentials  
-[Set-up](https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up)
+<a href="https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up" target="_blank">Set-up</a>
 
 - 4: install ruby, if you haven't already for some reason.    
 Install ruby
@@ -56,7 +56,7 @@ If it's not working, double check everything is in the right place in your direc
 
 - 10: You are already done! If you setup everything up properly your browser should have already opened up to show you your app! Sweet!
 
-######[One last lesson ->](/lesson/5)
+######<a href="/lesson/5" target="_blank">One last lesson -></a>
 - - -
 Sources:  
-[https://devcenter.heroku.com/articles/rack](https://devcenter.heroku.com/articles/rack)
+<a href="https://devcenter.heroku.com/articles/rack" target="_blank">https://devcenter.heroku.com/articles/rack</a>

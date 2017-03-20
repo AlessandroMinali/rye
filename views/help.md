@@ -16,7 +16,7 @@ Here is all custom code discussed in the excerises: [code]()
 
 #### Deploy Issues
 
-- [Install Heroku](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+- <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank">Install Heroku</a>
 - Make sure you have a Gemfile with all the above gems listed
 - Make sure your app is inside a file called `config.ru`
 - To get yo your page use the command `heroku open`, cool huh?

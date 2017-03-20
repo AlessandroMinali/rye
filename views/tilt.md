@@ -1,15 +1,15 @@
 ###Lesson 3
 
-So now that we are masters at understanding how [rum](https://github.com/chneukirchen/rum) works, let's try to customize it with some slick features. In this tutorial I'll be adding the following to rum:
+So now that we are masters at understanding how <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> works, let's try to customize it with some slick features. In this tutorial I'll be adding the following to rum:
 
  1. Support for HTML templates
  2. Support for view partials
 
-Grab the [rum repo from github](https://github.com/chneukirchen/rum) and let's start changing the source code!
+Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a> and let's start changing the source code!
 - - -
-In the land of ruby there are tons of different HTML templating languages. Some of the most popular are [erb](https://ruby-doc.org/stdlib-2.4.0/libdoc/erb/rdoc/ERB.html) (the default for rails) and [haml](http://haml.info). [Markdown](https://en.wikipedia.org/wiki/Markdown) is another general purpose markup which is used everywhere on the web (even this page !!!). Let's add all three!
+In the land of ruby there are tons of different HTML templating languages. Some of the most popular are <a href="https://ruby-doc.org/stdlib-2.4.0/libdoc/erb/rdoc/ERB.html" target="_blank">erb</a> (the default for rails) and <a href="http://haml.info" target="_blank">haml</a>. <a href="https://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> is another general purpose markup which is used everywhere on the web (even this page !!!). Let's add all three!
 
-We will use the [tilt gem](https://github.com/rtomayko/tilt) to make this relatively easy. Tilt provides a simple interface to hook up a ton of templating engines with very little effort.
+We will use the <a href="https://github.com/rtomayko/tilt" target="_blank">tilt gem</a> to make this relatively easy. Tilt provides a simple interface to hook up a ton of templating engines with very little effort.
 
     require 'tilt'
 
@@ -73,8 +73,8 @@ Now I can use `haml :index` or `haml "%h1 Test\n%hr\n%p Partials are working, hu
 
 Pretty cool, huh? Now go crazy and build a fully fleshed out app with different routes and partials!
 
-[Wondering how to deploy this app onto the internet? Next Lesson ->](/lesson/4)
+<a href="/lesson/4" target="_blank">Wondering how to deploy this app onto the internet? Next Lesson -></a>
 - - -
 Sources:  
-[http://planetruby.github.io/gems/tilt.html](http://planetruby.github.io/gems/tilt.html)
+<a href="http://planetruby.github.io/gems/tilt.html" target="_blank">http://planetruby.github.io/gems/tilt.html</a>
 

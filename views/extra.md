@@ -1,6 +1,6 @@
 ###Lesson 2
 
-In the [previous tutorial](/lesson/1) I introduced the micro-framework [rum](https://github.com/chneukirchen/rum) and how it works as a [rack](http://rack.github.io) app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as [sinatra](http://www.sinatrarb.com) and [rails](https://rubyonrails.org), which are rack apps themselves. Here is the code we will be breaking down:
+In the <a href="/lesson/1" target="_blank">previous tutorial</a> I introduced the micro-framework <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> and how it works as a <a href="http://rack.github.io" target="_blank">rack</a> app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as <a href="http://www.sinatrarb.com" target="_blank">sinatra</a> and <a href="https://rubyonrails.org" target="_blank">rails</a>, which are rack apps themselves. Here is the code we will be breaking down:
 
     require '../lib/rum'
 
@@ -30,12 +30,12 @@ In the [previous tutorial](/lesson/1) I introduced the micro-framework [rum](htt
         info("default", self)
       end
     }
-This is one of the examples that come in the [rum repo from github](https://github.com/chneukirchen/rum). If you haven't already, grab the repo and run the app from the `/sample` folder with the command `rackup path.ru`.  Go to [http://localhost:9292](http://localhost:9292) and see if you can guess/visit all the valid paths this app serves besides the default fallback response.
+This is one of the examples that come in the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. If you haven't already, grab the repo and run the app from the `/sample` folder with the command `rackup path.ru`.  Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> and see if you can guess/visit all the valid paths this app serves besides the default fallback response.
 - - -
 Let's get started. I'll be skimming over things I've already covered and pointing out new or interesting features I have yet to discuss, the first being:
     
     use Rack::ShowStatus
-`:use` is a [rack method](https://github.com/rack/rack/blob/4b33af1c80c822cbcbb69113ff1e54f9454921c1/lib/rack/builder.rb#L62-L87) that is *used* to load in [middleware](http://stackoverflow.com/questions/2256569/what-is-rack-middleware), which "catches all empty responses and replaces them with a site explaining the error." Middleware is a pretty cool part of rack that allows you to stack and rearrange rack apps on top of each other. Each middleware is a rack app that has a chance to add or change the `env`, `response` and `request` before passing it to the next app. For example rails is basically a giant tower of rack middleware! Here is a peek at what a default rails app looks like: 
+`:use` is a <a href="https://github.com/rack/rack/blob/4b33af1c80c822cbcbb69113ff1e54f9454921c1/lib/rack/builder.rb#L62-L87" target="_blank">rack method</a> that is *used* to load in <a href="http://stackoverflow.com/questions/2256569/what-is-rack-middleware" target="_blank">middleware</a>, which "catches all empty responses and replaces them with a site explaining the error." Middleware is a pretty cool part of rack that allows you to stack and rearrange rack apps on top of each other. Each middleware is a rack app that has a chance to add or change the `env`, `response` and `request` before passing it to the next app. For example rails is basically a giant tower of rack middleware! Here is a peek at what a default rails app looks like: 
 
 	use Rack::Sendfile
 	use ActionDispatch::Static
@@ -76,7 +76,7 @@ Here we are taking advantage of the ruby **Kernel** module and appending a new m
 
     run Rum.new { ... }
 
-Once again we find yourselves in familiar water. If you don't know what this does, visit the [last tutorial](/lesson/1) where I explain how rack setups up our app. Let's go straight to the first `:on` block:
+Once again we find yourselves in familiar water. If you don't know what this does, visit the <a href="/lesson/1" target="_blank">last tutorial</a> where I explain how rack setups up our app. Let's go straight to the first `:on` block:
 
       on path('foo') do
         info("foo", self)
@@ -85,7 +85,7 @@ Once again we find yourselves in familiar water. If you don't know what this doe
         end
       end
  
- Let's assume a user attempts to hit our site with the url [http://localhost:9292/foo](http://localhost:9292/foo). `path('foo')` is called to be passed into `:on`:
+ Let's assume a user attempts to hit our site with the url <a href="http://localhost:9292/foo" target="_blank">http://localhost:9292/foo</a>. `path('foo')` is called to be passed into `:on`:
 
     def path(p)
       lambda {
@@ -164,20 +164,20 @@ I won't go into details but this final `:on` call will always match since `:also
 
 Hopefully you now have a feel of how the rum router works in deciding on what to render for the user. Test your knowledge and see if you can work through what happens on each of these requests to our app:
 
- - [http://localhost:9292/foo/bar](http://localhost:9292/foo/bar)
- - [http://localhost:9292/foo/test](http://localhost:9292/foo/test)
- - [http://localhost:9292/bar/foo](http://localhost:9292/bar/foo)
- - [http://localhost:9292/say/hello/to/mom](http://localhost:9292/say/hello/to/mom)
- - [http://localhost:9292/say/goodbye/to/my/dog/](http://localhost:9292/say/goodbye/to/my/dog/)
- - [http://localhost:9292/foo/say/nothing](http://localhost:9292/foo/say/nothing)
- - [http://localhost:9292/foo/bar/say/hello/to/mom/for/me](http://localhost:9292/foo/bar/say/hello/to/mom/for/me)
+ - <a href="http://localhost:9292/foo/bar" target="_blank">http://localhost:9292/foo/bar</a>
+ - <a href="http://localhost:9292/foo/test" target="_blank">http://localhost:9292/foo/test</a>
+ - <a href="http://localhost:9292/bar/foo" target="_blank">http://localhost:9292/bar/foo</a>
+ - <a href="http://localhost:9292/say/hello/to/mom" target="_blank">http://localhost:9292/say/hello/to/mom</a>
+ - <a href="http://localhost:9292/say/goodbye/to/my/dog/" target="_blank">http://localhost:9292/say/goodbye/to/my/dog/</a>
+ - <a href="http://localhost:9292/foo/say/nothing" target="_blank">http://localhost:9292/foo/say/nothing</a>
+ - <a href="http://localhost:9292/foo/bar/say/hello/to/mom/for/me" target="_blank">http://localhost:9292/foo/bar/say/hello/to/mom/for/me</a>
 
 Now that you are confident with the rum framework try building a little personal webpage! Customize the routes you want to have and make your own custom html pages to show on each one!
 
-######[Want to add custom pages to your rum app? Next lesson ->](/lesson/3)
+######<a href="/lesson/3" target="_blank">Want to add custom pages to your rum app? Next lesson -></a>
 - - -
 Sources:  
-[https://github.com/chneukirchen/rum](https://github.com/chneukirchen/rum)  
-[http://rack.github.io](http://rack.github.io)  
-[https://github.com/rack/rack](https://github.com/rack/rack)  
+<a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  
+<a href="http://rack.github.io" target="_blank">http://rack.github.io</a>  
+<a href="https://github.com/rack/rack" target="_blank">https://github.com/rack/rack</a>  
 
