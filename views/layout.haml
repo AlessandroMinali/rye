@@ -3,8 +3,11 @@
     margin: 0 auto;
     width: 50%
   }
-  code {
+  pre > code {
     white-space: pre !important;
+  }
+  code {
+    white-space: normal !important;
   }
   @media only screen and (max-width: 1000px) {
     body {
@@ -36,7 +39,7 @@
   %a.button{href: '/about'}  About
   %a.button{href: '/help'}  Help?
 %hr
-Signup to get a notification when the next article is out:
+Signup to get a notification for new articles:
 %form{ action: 'https://packmule.us8.list-manage.com/subscribe/post', method: 'post', style: 'margin-bottom: 0px;' }
   %input{ type: 'hidden', name: 'u', value:'05df9a2a90aaaa22b906c11d9' }
   %input{ type: 'hidden', name: 'id', value: 'b7c9b7a5e2' }

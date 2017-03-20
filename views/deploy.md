@@ -14,8 +14,7 @@ Deploying pure racks apps is straight forward and rewarding. I'll be hand holdin
 Run `heroku login` and enter your credentials  
 <a href="https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up" target="_blank">Set-up</a>
 
-- 4: install ruby, if you haven't already for some reason.    
-Install ruby
+- 4: Install ruby, if you haven't already for some reason.    
 
 - 5: Get bundler, a popular gem to manage gem's for applications.  
 Run this command: `gem install bundler`
@@ -31,7 +30,7 @@ Let's assume this is the rum app you want to deploy:
       }
 Save that into a file called `config.ru`. Try running it with `rackup config.ru` to double check. If it fails, makes sure `rum.rb` is in the right place or change the `require` call in your app.
 
-- 7: Create a file called `Gemfile`, no extension  
+- 7: Create a file called `Gemfile` in the root of your app, no extension  
 This will contain all gems you need for your app to run. In this case the gemfile can just look like this:
 
       source 'https://rubygems.org'
@@ -44,7 +43,7 @@ This will contain all gems you need for your app to run. In this case the gemfil
 
 If it's not working, double check everything is in the right place in your directory and that you have all the gems you want listed in the Gemfile.
 
-- 9: Install git and if you already have it type the following commands:
+- 9: Install git and if you already have it type the following commands from the root of your app:
 
       git init
       git add .

@@ -9,7 +9,7 @@ I'll be going step by step through how the ruby micro-framework <a href="https:/
       end
     }
 
-Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. Save the above code in the  `/sample` folder of the rum repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> in your browser to see what it does.
+Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. Save the above code in the  `/sample` folder of the repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> in your browser to see what it does.
 
 The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to <a href="/about" target="_blank">reach out to me</a> if you have something you can't figure out!
 - - -
@@ -31,7 +31,7 @@ If we really want to show off we could implement this simple rum app as a single
 `run Proc.new { |env| [200, {'Content-Type' => 'text/html'}, ['Hello, World!']] }`
 but the point of rum is too allow us to respond to many different situations vs. just serving a single response every time.
 
-`Rum.new` executes our `initialize` method:
+`Rum.new` executes our `:initialize` method:
 
     def initialize(&blk)
       @blk = blk
@@ -72,7 +72,7 @@ Rum makes a <a href="http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup" ta
     instance_eval(&@blk)
     @res.status = 404  unless @matched || !@res.empty?
     return @res.finish
-The proc we saved upon initialization is now ready to be processed so we run it with `instance_eval`. This makes it run in the local context of the **Rum** object. And the magic begins...Just incase you forgot we will be evaluating this code finally:
+The proc we saved upon initialization is now ready to be processed so we run it with `:instance_eval`. This makes it run in the local context of the **Rum** object. And the magic begins...Just incase you forgot we will be evaluating this code finally:
 
     # inside simple.ru  
     on default do
@@ -94,7 +94,7 @@ Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return 
     def default
       true
     end
-so we end up with `<a href="https://ruby-doc.org/core-2.2.0/Array.html#method-i-map" target="_blank">true].map { ... }`. Luckily `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets [mapped</a> back to `*arg`.
+so we end up with `[true].map { ... }`. Luckily `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets <a href="https://ruby-doc.org/core-2.2.0/Array.html#method-i-map" target="_blank">mapped</a> back to `*arg`.
 
 Therefore we have `yield true` which passes `true` to:
   
@@ -109,7 +109,7 @@ The block executes completely ignoring our passed in parameter since we don't re
     end
 This takes the string and writes it to our response object!
 
-Now we exit from the yield block and continue executing `:on`. In next line we reassign the env variables we stored earlier and since we found our route we set `@matched` to equal true and prevent further parsing. Then we exit from the `instance_eval(&@blk)` line! Phew!
+Now we exit from the yield block and continue executing `:on`. In next line we reassign the env variables we stored earlier and since we found our route we set `@matched` to equal true and prevent further parsing. Then we exit from the `:instance_eval(&@blk)` line! Phew!
 
 The only thing left is to wrap up the response so rack can send it to our visitor. Just as a refresher we are back here:
 
@@ -129,7 +129,7 @@ The only thing left is to wrap up the response so rack can send it to our visito
      if !@matched || @res.empty?
        @res.status = 404
      end
-Since we matched will keep the default value of the status code which is `200`. And lastly we signal to rack that we are done and send it the 3 element array it is expecting (conveniently already assemble since we used **Rack::Response**). The `return` exits `:_call` and then the original `:call` finishes as well completing rack's execution of our app. It takes the value returned and generates the webpage.
+Since we matched, we'll keep the default value of the status code which is `200`. And lastly we signal to rack that we are done and send it the 3 element array it is expecting (conveniently already assemble since we used **Rack::Response**). The `return` exits `:_call` and then the original `:call` finishes as well completing rack's execution of our app. It takes the value returned and generates the webpage.
 
 The user now sees `Hello, World!` in their browser window. Amazing right?
 
@@ -139,7 +139,7 @@ A quick summary of things to take away from this code review:
  2. splat (*) can be used to group parameters into an array
  3. creating rack apps is as simple as having an object with `:call(env)` method that returns a 3 element array!
 
-######<a href="/lesson/2" target="_blank">Interested in seeing a more complex example? Next Lesson -></a>
+######[Interested in seeing a more complex example? Next Lesson ->](/lesson/2)
 - - -
 Sources:  
 <a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  

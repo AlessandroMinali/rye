@@ -61,7 +61,7 @@ Let's get started. I'll be skimming over things I've already covered and pointin
 	use Rack::ETag
 	run Rails.application.routes
    
-   Anyhow, continuing on we have this class definition: 
+   Anyhow, continuing on we have this module definition: 
 
     module Kernel
       def info(title, r)
@@ -96,7 +96,7 @@ Once again we find yourselves in familiar water. If you don't know what this doe
         end
       }
     end
-  Rum setups up a lambda which is basically a block of code that can be evaluated at some other point in time when you `:call` it. This is passed into `:on` and so `*arg` becomes an array holding the lambda as it's single element. Inside `:on`, `@matched` is still false so we move forward and make a copy of some `env` variables.
+  Rum setups up a [lambda](http://awaxman11.github.io/blog/2013/08/05/what-is-the-difference-between-a-block/) which is basically a block of code that can be evaluated at some other point in time when you `:call` it. This is passed into `:on` and so `*arg` becomes an array holding the lambda as it's single element. Inside `:on`, `@matched` is still false so we move forward and make a copy of some `env` variables.
 
     def on(*arg, &block)
       .
@@ -127,7 +127,7 @@ Before breaking out of this `:on` call we find ourselves hitting another one:
     on path('bar') do
       info("foo/bar", self)
     end
-The same process of storing and then evaluating the `:path` lambda occurs but this time the regex fails to match. Therefore the last condition of `|a| a == true || (a != false && a.call) || return` is evaluated, avoiding yielding the block. We now returns back to the outside `on path('foo') do` block.
+The same process of storing and then evaluating the `:path` lambda occurs but this time the regex fails to match. Therefore the last condition of `|a| a == true || (a != false && a.call) || return` is evaluated, avoiding yielding the block. We now return back to the outside `on path('foo') do` block.
 
 Continuing execution we reassign the `env` variables we stored and mark `@matched` as true. We now hit another `:on` block:
     
@@ -148,7 +148,7 @@ which simply queries the **Rack::Response** object to see if the user is making 
     def segment
       path("[^\\/]+")
     end
-which is just a specific `:path` call, and we already know how those work. Needless to say after putting all these into the `*arg ` array the first line of `:on` kicks us out since `@matched` has been set to `true`. None of the lambdas or the nested block is evaluated.
+which is just a specific `:path` call, and we already know how those work. Needless to say after putting all these into the `*arg ` array the first line of `:on` kicks us out since `@matched` has been set to `true`. None of the lambdas or the nested block are evaluated.
 
 The next line has a single call to the `:also` method:
 
@@ -174,7 +174,7 @@ Hopefully you now have a feel of how the rum router works in deciding on what to
 
 Now that you are confident with the rum framework try building a little personal webpage! Customize the routes you want to have and make your own custom html pages to show on each one!
 
-######<a href="/lesson/3" target="_blank">Want to add custom pages to your rum app? Next lesson -></a>
+######[Want to add custom pages to your rum app? Next lesson ->](/lesson/3)
 - - -
 Sources:  
 <a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  
