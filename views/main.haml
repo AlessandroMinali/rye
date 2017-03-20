@@ -1,0 +1,44 @@
+:css
+  .six.button {
+    min-height: 150px;
+    padding: 30px 50px;
+    margin-bottom: 0px;
+    white-space: normal;
+  }
+  @media only screen and (max-width: 1200px) {
+    .six.button {
+      padding: 30px 30px;
+    }
+  }
+  @media only screen and (max-width: 800px) {
+    .six.button {
+      padding: 30px 10px;
+    }
+  }
+
+%h3 Let's Learn
+%p 
+  :markdown
+    [Rum](https://github.com/chneukirchen/rum) is a tiny framework written in pure [ruby](https://www.ruby-lang.org/en/) with only one dependency, [rack](http://rack.github.io). This provides a unqiue opportunity to discover how a framework can be built as a rack app. If you have used ruby on the web you would have either heard of [Ruby on Rails](https://rubyonrails.org) and [Sinatra](http://www.sinatrarb.com) which are themselves glorified rack apps!
+
+%p
+  At 
+  %b less than 150
+  lines of code, rum is a prefect starting place to jump in, dig around and build up our own personal framework.
+  %br
+  %small
+    psst. this whole site was made on
+    %em my
+    custom version of rum, that I'll share with you at the end of your journey here.
+
+%h5 Are you ready?
+
+.row
+  %a.six.column.button{href: '/lesson/1'}
+    i. Learn How Rum Works
+  %a.six.column.button{href: '/lesson/2'}
+    ii. Explore a Complex Rum Example
+  %a.six.column.button{href: '/lesson/3'}
+    iii. Make Rum Better (Add Templates)
+  %a.six.column.button{href: '/lesson/4'}
+    iv. Real World Example and Deploy

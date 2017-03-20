@@ -1,3 +1,5 @@
+##Lesson 1
+
 I'll be going step by step through how the ruby micro-framework [rum](https://github.com/chneukirchen/rum) works using the simplest example I can think of:
 
     require '../lib/rum'
@@ -7,7 +9,9 @@ I'll be going step by step through how the ruby micro-framework [rum](https://gi
       end
     }
 
-Grab the [rum repo from github](https://github.com/chneukirchen/rum). Save the above code in the  `/sample` folder of the rum repo as `simple.ru`, then you should be able to run it with `rackup simple.ru` . Go to http://localhost:9292 in your browser to see what it does. 
+Grab the [rum repo from github](https://github.com/chneukirchen/rum). Save the above code in the  `/sample` folder of the rum repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to [http://localhost:9292](http://localhost:9292) in your browser to see what it does.
+
+The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to [reach out to me](/about) if you have something you can't figure out!
 - - -
 Let's start and see how this mirco-framework works!
 
@@ -16,7 +20,7 @@ Let's start and see how this mirco-framework works!
 We ask ruby to load the rum library from our machine. This goes to rum.rb and loads the [rack](http://rack.github.io) library with `require 'rack'` and setups up our two classes **Rack::Response** and **Rum**.
 
     run Rum.new {...}
-  Now we have to pass our app to rack. In the end all rack wants from us is an **object** that responds to `:call` that takes one parameter and returns an array with three elements
+Here we pass our app to rack. In the end all rack wants from us is an **object** that responds to `:call` with one parameter and returns an array with three elements:
   
 
  1. HTTP response code
@@ -42,14 +46,14 @@ This expects a `block` to be given and assigns it to a local variable so that es
  
  At this point our app is setup and now awaits some activity from someone trying to reach our server.
 
-Now here is the cool part, when the server gets a request  rack tries to handle it and our proc is lazily evaluated to generate the response! Rum finally gets to jump in and do some work.
+Now here is the cool part, when the server gets a request, rack tries to handle it and our proc is lazily evaluated to generate the response! Rum finally gets to jump in and do some work.
 
 As I mentioned above rack's entry point into app is through the `:call` method. Here's rum's:
 
     def call(env)
       dup._call(env)
     end
-Rum makes a [duplicate](http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup) of itself to avoid carrying over instances variables and the like between requests. With a fresh and clean copy of the **Rum** object we continue processing the call:
+Rum makes a [duplicate](http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup) of itself to avoid carrying over instance variables and the like between requests. With a fresh and clean copy of the **Rum** object we continue processing the call:
 
     def _call(env)
       @env = env
@@ -90,9 +94,9 @@ Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return 
     def default
       true
     end
-so we end up with `[true].map { ... }`. Luckily in this case `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets [mapped](https://ruby-doc.org/core-2.2.0/Array.html#method-i-map) back to *arg.
+so we end up with `[true].map { ... }`. Luckily `|a| a == true || (a != false && a.call) || return` evaluates right away since `a == true`, and that gets [mapped](https://ruby-doc.org/core-2.2.0/Array.html#method-i-map) back to `*arg`.
 
-Now we have `yield true` which pass `true` to:
+Therefore we have `yield true` which passes `true` to:
   
     puts 'Hello, World!'
 The block executes completely ignoring our passed in parameter since we don't reference it anywhere.  Rum provides an overwritten version of the `:puts` method:
@@ -107,7 +111,7 @@ This takes the string and writes it to our response object!
 
 Now we exit from the yield block and continue executing `:on`. In next line we reassign the env variables we stored earlier and since we found our route we set `@matched` to equal true and prevent further parsing. Then we exit from the `instance_eval(&@blk)` line! Phew!
 
-The only thing left is to wrap up our response and give it to rack to send to our end user. Just as refresher we are back here:
+The only thing left is to wrap up the response so rack can send it to our visitor. Just as a refresher we are back here:
 
     def _call(env)
       .
@@ -135,9 +139,9 @@ A quick summary of things to take away from this code review:
  2. splat (*) can be used to group parameters into an array
  3. creating rack apps is as simple as having an object with `:call(env)` method that returns a 3 element array!
 
-[Interested in seeing a more complex example? Right this way ->]()
+######[Interested in seeing a more complex example? Next Lesson ->](/lesson/2)
 - - -
-Sources:
-https://github.com/chneukirchen/rum
-http://rack.github.io
-https://github.com/rack/rack
+Sources:  
+[https://github.com/chneukirchen/rum](https://github.com/chneukirchen/rum)  
+[http://rack.github.io](http://rack.github.io)  
+[https://github.com/rack/rack](https://github.com/rack/rack)  

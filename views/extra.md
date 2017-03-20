@@ -1,4 +1,6 @@
-In the [previous tutorial]() I introduced the micro-framework [rum](https://github.com/chneukirchen/rum) and how it works as a [rack](http://rack.github.io) app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as [sinatra](http://www.sinatrarb.com) and [rails](https://rubyonrails.org), which are rack apps themselves. Here is the code we will be breaking down:
+##Lesson 2
+
+In the [previous tutorial](/lesson/1) I introduced the micro-framework [rum](https://github.com/chneukirchen/rum) and how it works as a [rack](http://rack.github.io) app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as [sinatra](http://www.sinatrarb.com) and [rails](https://rubyonrails.org), which are rack apps themselves. Here is the code we will be breaking down:
 
     require '../lib/rum'
 
@@ -28,7 +30,7 @@ In the [previous tutorial]() I introduced the micro-framework [rum](https://gith
         info("default", self)
       end
     }
-This is one of the examples that come in the [rum repo from github](https://github.com/chneukirchen/rum). If you haven't already, grab the repo and run the app from the `/sample` folder with the command `rackup path.ru` .  Go to http://localhost:9292 and see if you can guess/visit all the valid paths this app serves besides the default fallback response.
+This is one of the examples that come in the [rum repo from github](https://github.com/chneukirchen/rum). If you haven't already, grab the repo and run the app from the `/sample` folder with the command `rackup path.ru`.  Go to [http://localhost:9292](http://localhost:9292) and see if you can guess/visit all the valid paths this app serves besides the default fallback response.
 - - -
 Let's get started. I'll be skimming over things I've already covered and pointing out new or interesting features I have yet to discuss, the first being:
     
@@ -70,11 +72,11 @@ Let's get started. I'll be skimming over things I've already covered and pointin
       end
     end
 
-Here we are taking advantage of the ruby **Kernel** module and appending a new method. The **Kernel** is special in that every ruby object can use it methods. This `:info` will come up later as our own personal helper method.
+Here we are taking advantage of the ruby **Kernel** module and appending a new method. The **Kernel** is special in that every ruby object can use it's methods. This `:info` will come up later as our own personal helper method.
 
     run Rum.new { ... }
 
-Once again we find yourselves in familiar water. If you don't know what this does, visit the [last tutorial]() where I explain how rack setups up our app. Let's go straight to the first `:on` block:
+Once again we find yourselves in familiar water. If you don't know what this does, visit the [last tutorial](/lesson/1) where I explain how rack setups up our app. Let's go straight to the first `:on` block:
 
       on path('foo') do
         info("foo", self)
@@ -83,7 +85,7 @@ Once again we find yourselves in familiar water. If you don't know what this doe
         end
       end
  
- Let's assume a user attempts to hit our site with the url http://localhost:9292/foo . `path('foo')` is called to be passed into `:on`:
+ Let's assume a user attempts to hit our site with the url [http://localhost:9292/foo](http://localhost:9292/foo). `path('foo')` is called to be passed into `:on`:
 
     def path(p)
       lambda {
@@ -94,14 +96,14 @@ Once again we find yourselves in familiar water. If you don't know what this doe
         end
       }
     end
-  Rum setups up a lambda which is basically a block of code that can be evaluated at some other point in time when you `:call` it. This is passed into `:on` and so `*arg` becomes an array holding the lambda as it's single element. Inside `:on` `@matched` is still false so we move forward and make a copy of some `env` variables.
+  Rum setups up a lambda which is basically a block of code that can be evaluated at some other point in time when you `:call` it. This is passed into `:on` and so `*arg` becomes an array holding the lambda as it's single element. Inside `:on`, `@matched` is still false so we move forward and make a copy of some `env` variables.
 
     def on(*arg, &block)
       .
       .
       yield *arg.map { |a| a == true || (a != false && a.call) || return }
 
-Here the first condition fails, so it evaluate the second one. `a` in this case is our lambda so it is not `false` and `a.call` is run:
+Here the first condition fails, so we evaluate the second one. `a` in this case is our lambda so it is not `false` and `a.call` is run:
 
     lambda {
       if env["PATH_INFO"] =~ /\A\/(#{p})(\/|\z)/
@@ -111,7 +113,7 @@ Here the first condition fails, so it evaluate the second one. `a` in this case 
       end
     }
  
- `p` was passed to the lambda earlier as `'foo'`. If a match is found`$1` and `$2` will be assigned as the first and second matching string group from the regex respectively. `$'` will be anything left over. The successful match is returned as the output of the conditional. This is mapped back to the `arg` array and passed to `yield` and the block is now evaluated:
+ `p` was passed to the lambda earlier as `'foo'`. If a match is found`$1` and `$2` will be assigned as the first and second matching string group from the regex respectively. `$'` will be anything left over. The successful match is returned as the output of the conditional. This is mapped back to the `arg` array, passed to `yield` and the block is now evaluated:
 
     info("foo", self)
     on path('bar') do
@@ -125,9 +127,9 @@ Before breaking out of this `:on` call we find ourselves hitting another one:
     on path('bar') do
       info("foo/bar", self)
     end
-The same process of storing and then evaluating the `:path` lambda occurs but this time the regex fails to match. Therefore the last condition of `|a| a == true || (a != false && a.call) || return` is evaluated,  avoiding yielding the block and it  now returns us back to the outside `on path('foo') do` block.
+The same process of storing and then evaluating the `:path` lambda occurs but this time the regex fails to match. Therefore the last condition of `|a| a == true || (a != false && a.call) || return` is evaluated, avoiding yielding the block. We now returns back to the outside `on path('foo') do` block.
 
-Continuing execution we reassign the `env` variables we stored and marked `@matched` as true. We now hit another `:on` block:
+Continuing execution we reassign the `env` variables we stored and mark `@matched` as true. We now hit another `:on` block:
     
     run Rum.new {
       .
@@ -158,23 +160,24 @@ This resets the state of matching so the next `:on` block we encounter will be p
     on default do
       info("default", self)
     end
-I won't go into details but this final `:on` call will always match since `:also` resets the state just before it and `:default` is always `true`. This means that every response from our app well at least give the use the content of one `:info` call! Neat.
+I won't go into details but this final `:on` call will always match since `:also` resets the state just before it and `:default` is always `true`. This means that every response from our app will at least give us the content of one `:info` call! Neat.
 
 Hopefully you now have a feel of how the rum router works in deciding on what to render for the user. Test your knowledge and see if you can work through what happens on each of these requests to our app:
 
- - http://localhost:9292/foo/bar
- - http://localhost:9292/foo/test
- - http://localhost:9292/bar/foo
- - http://localhost:9292/say/hello/to/mom
- - http://localhost:9292/say/goodbye/to/my/dog/
- - http://localhost:9292/foo/say/nothing
- - http://localhost:9292/foo/bar/say/hello/to/mom/for/me
+ - [http://localhost:9292/foo/bar](http://localhost:9292/foo/bar)
+ - [http://localhost:9292/foo/test](http://localhost:9292/foo/test)
+ - [http://localhost:9292/bar/foo](http://localhost:9292/bar/foo)
+ - [http://localhost:9292/say/hello/to/mom](http://localhost:9292/say/hello/to/mom)
+ - [http://localhost:9292/say/goodbye/to/my/dog/](http://localhost:9292/say/goodbye/to/my/dog/)
+ - [http://localhost:9292/foo/say/nothing](http://localhost:9292/foo/say/nothing)
+ - [http://localhost:9292/foo/bar/say/hello/to/mom/for/me](http://localhost:9292/foo/bar/say/hello/to/mom/for/me)
 
-Now that you are a master with the rum framework try building a little personal webpage app! Customize the routes you want to have and make your own custom html pages to show on each one!
+Now that you are confident with the rum framework try building a little personal webpage! Customize the routes you want to have and make your own custom html pages to show on each one!
 
-[Want to make it easier to add custom pages to your rum app? Right this way ->]()
+######[Want to add custom pages to your rum app? Next lesson ->](/lesson/3)
 - - -
-Sources:
-https://github.com/chneukirchen/rum
-http://rack.github.io
+Sources:  
+[https://github.com/chneukirchen/rum](https://github.com/chneukirchen/rum)  
+[http://rack.github.io](http://rack.github.io)  
+[https://github.com/rack/rack](https://github.com/rack/rack)  
 

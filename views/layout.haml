@@ -1,0 +1,36 @@
+:css
+  body {
+    margin: 0 auto;
+    width: 50%
+  }
+  code {
+    white-space: pre !important;
+  }
+  @media only screen and (max-width: 1000px) {
+    body {
+      width: 70%
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    body {
+      width: 90%
+    }
+  }
+%title Have a drink of Rum
+%meta{name: 'description', content: 'Understanding how the rum framework provides a simple interface to create simple web apps'}
+
+%h1
+  Diving into the Rum
+  Framework
+%a.button{href: '/'} Home
+%a.button{href: '/'}  Repo
+%a.button{href: '/about'}  About
+%a.button{href: '/help'}  Help?
+= yield
+- unless root
+  %a.button{href: '/'} Home
+  %a.button{href: '/'}  Repo
+  %a.button{href: '/about'}  About
+  %a.button{href: '/help'}  Help?
+= haml :disqus, layout: nil
+%link{:rel => :stylesheet, :type => :"text/css", href: "//cdnjs.cloudflare.com/ajax/libs/skeleton-framework/1.1.1/skeleton.min.css"}
