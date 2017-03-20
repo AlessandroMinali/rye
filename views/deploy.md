@@ -4,7 +4,7 @@ Deploying pure racks apps is straight forward and rewarding. I'll be hand holdin
 
 - - -
 
-- 1: make a **free** heroku account. This will allow you to spin up as many projects as you want for anyone to use. The only limitation is how much up-time your website will have. It'll sleep every 30 minutes and heroku caps activity at a certain amount of hours. Still pretty good for small projects to share with friends.  
+- 1: make a **free** heroku account. This will allow you to spin up 5 projects for anyone to use. The only limitation is how much up-time your website will have. It'll sleep every 30 minutes and heroku caps activity at a certain amount of hours. Still pretty good for small projects to share with friends.  
 <a href="https://signup.heroku.com/dc" target="_blank">Make an account</a>
 
 - 2: Download and install heroku tools for the command line.  
