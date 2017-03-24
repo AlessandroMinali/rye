@@ -113,7 +113,7 @@ Here the first condition fails, so we evaluate the second one. `a` in this case 
       end
     }
  
- `p` was passed to the lambda earlier as `'foo'`. If a match is found`$1` and `$2` will be assigned as the first and second matching string group from the regex respectively. `$'` will be anything left over. The successful match is returned as the output of the conditional. This is mapped back to the `arg` array, passed to `yield` and the block is now evaluated:
+ `p` was passed to the lambda earlier as `'foo'`. If a match is found`$1` and `$2` will be assigned as the first and second matching string groups from the regex respectively. `$'` will be anything left over. The successful match is returned as the output of the conditional. This is mapped back to the `arg` array, passed to `yield` and the block is now evaluated:
 
     info("foo", self)
     on path('bar') do
@@ -162,7 +162,7 @@ This resets the state of matching so the next `:on` block we encounter will be p
     end
 I won't go into details but this final `:on` call will always match since `:also` resets the state just before it and `:default` is always `true`. This means that every response from our app will at least give us the content of one `:info` call! Neat.
 
-Hopefully you now have a feel of how the rum router works in deciding on what to render for the user. Test your knowledge and see if you can work through what happens on each of these requests to our app:
+Hopefully you now have a feel of how the rum router works in deciding on what to render for the user. Test your knowledge and see if you can work through what happens on each of these requests to our app (before clicking them and finding out):
 
  - <a href="http://localhost:9292/foo/bar" target="_blank">http://localhost:9292/foo/bar</a>
  - <a href="http://localhost:9292/foo/test" target="_blank">http://localhost:9292/foo/test</a>

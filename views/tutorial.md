@@ -87,7 +87,7 @@ First up is:
       env["SCRIPT_NAME"], env["PATH_INFO"] = s, p
       @matched = true
     end
-The method takes two parameters, the last being a block. The *first* param actually grabs all values passed in and puts them into a single array which we can reference with `arg`. Entering the method the first line checks our `@matched` variable but that is still false.  Next we make copies of some env variables as again they might be altered. 
+The method takes two parameters, the last being a block. The *first* parameter actually grabs all values passed in and puts them into a single array which we can reference with `arg`. Entering the method, the first line checks our `@matched` variable but that is still false.  Next we make copies of some env variables as again they will be altered. 
 
 Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return }` we now traverse into the block that we passed in. `*arg` in this case was `default`:
     
@@ -109,7 +109,7 @@ The block executes completely ignoring our passed in parameter since we don't re
     end
 This takes the string and writes it to our response object!
 
-Now we exit from the yield block and continue executing `:on`. In next line we reassign the env variables we stored earlier and since we found our route we set `@matched` to equal true and prevent further parsing. Then we exit from the `:instance_eval(&@blk)` line! Phew!
+Now we exit from the yield block and continue executing `:on`. In next line we reassign the env variables we stored earlier and, since we found our route, we set `@matched` to equal true to prevent further parsing. Then we exit from the `:instance_eval(&@blk)` line! Phew!
 
 The only thing left is to wrap up the response so rack can send it to our visitor. Just as a refresher we are back here:
 
