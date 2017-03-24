@@ -1,8 +1,12 @@
 require './lib/rye'
 
+#used to serve 'text/html' content
 use Rack::ContentType
 
-run Rum.new {
+run Rye.new {
+  # these routes are super simple, just a string!
+  # this is accomplished by checking on line 43 of rye.rb
+  # saves me the effort of typing out path('lesson')
   on 'lesson', number do |_,n|
     case n.to_i
     when 1; markdown :tutorial
