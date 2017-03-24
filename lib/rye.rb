@@ -103,7 +103,8 @@ class Rye
         args[0].merge!(layout: nil) # once a layout has been chosen stop looking
         # layout is always render in haml and we pass
         # it the inner child partial that it will yield
-        haml(layout.to_sym, *args) { send(__method__, text, *args) }
+        func = __method__
+        haml(layout.to_sym, *args) { send(func, text, *args) }
       else
         template = v.new(*args) do
           find_partial text
