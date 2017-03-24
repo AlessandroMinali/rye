@@ -73,7 +73,7 @@ Now I can use `haml :index` or `haml "%h1 Test\n%hr\n%p Partials are working, hu
 
 Pretty cool, huh? Now go crazy and build a fully fleshed out app with different routes and partials!
 
-<a href="/lesson/4" target="_blank">Wondering how to deploy this app onto the internet? Next Lesson -></a>
+######[Wondering how to deploy this app onto the internet? Next Lesson ->](/lesson/4)
 - - -
 Sources:  
 <a href="http://planetruby.github.io/gems/tilt.html" target="_blank">http://planetruby.github.io/gems/tilt.html</a>

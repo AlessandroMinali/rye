@@ -55,7 +55,7 @@ If it's not working, double check everything is in the right place in your direc
 
 - 10: You are already done! If you setup everything up properly your browser should have already opened up to show you your app! Sweet!
 
-######<a href="/lesson/5" target="_blank">One last lesson -></a>
+######[One last lesson ->](/lesson/5)
 - - -
 Sources:  
 <a href="https://devcenter.heroku.com/articles/rack" target="_blank">https://devcenter.heroku.com/articles/rack</a>
