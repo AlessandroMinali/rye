@@ -9,6 +9,6 @@ Want to run the website on your local?
 
 Easy peasy!
 
-For a detailed breakdown of the custom code I made to host these tutorial go to <a href="https://github.com/AlessandroMinali/rye/blob/master/lib/rye.rb" target="_blank">here</a>.
+For a detailed breakdown of the custom code I made to host these tutorials go to <a href="https://github.com/AlessandroMinali/rye/blob/master/lib/rye.rb" target="_blank">here</a>.
 
 Pull requests welcome.
