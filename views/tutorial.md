@@ -13,14 +13,14 @@ Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo 
 
 The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to <a href="/about" target="_blank">reach out to me</a> if you have something you can't figure out!
 - - -
-Let's start and see how this mirco-framework works!
+Let's start and see how this micro-framework works!
 
     require '../lib/rum'
 
 We ask ruby to load the rum library from our machine. This goes to rum.rb and loads the <a href="http://rack.github.io" target="_blank">rack</a> library with `require 'rack'` and setups up our two classes **Rack::Response** and **Rum**.
 
     run Rum.new {...}
-Here we pass our app to rack. In the end all rack wants from us is an **object** that responds to `:call` with one parameter and returns an array with three elements:
+Here we pass our app to rack. In the end all rack wants from us is i. an **object** that responds to `:call` with one parameter and ii. returns an array with three elements:
   
 
  1. HTTP response code

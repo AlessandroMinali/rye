@@ -20,7 +20,7 @@ Add this to your rack app:
 
 #### Don't know where to put code?
 
-Here is all custom code discussed in the excerises: <a href="https://github.com/AlessandroMinali/rye" target="_blank">code</a>
+Here is all custom code discussed in the exercises: <a href="https://github.com/AlessandroMinali/rye" target="_blank">code</a>
 
 #### Deploy Issues
 
