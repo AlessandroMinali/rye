@@ -1,4 +1,4 @@
-###Lesson 3
+### Lesson 3
 
 So now that we are masters at understanding how <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> works, let's try to customize it with some slick features. In this tutorial I'll be adding the following to rum:
 
@@ -11,18 +11,20 @@ In the land of ruby there are tons of different HTML templating languages. Some 
 
 We will use the <a href="https://github.com/rtomayko/tilt" target="_blank">tilt gem</a> to make this relatively easy. Tilt provides a simple interface to hook up a ton of templating engines with very little effort.
 
+Add this line to the top of your `rum.rb` file:
+
     require 'tilt'
 
-Add this line to the top of your `rum.rb` file.
+This is basically all the code you need to get `erb` templates up and running:
 
     template =  Tilt::ErubisTemplate.new do
       "Hello <%= name %>!"
     end
     puts template.render( self, name: 'World' )
 
-This is basically all the code you need to get `erb` templates up and running. I want the functionality of our templates to be a little nicer to use. I want a typical template call to look like:
+I want the functionality of our templates to be a little nicer to use. I want a typical template call to look like:
 
-    erb '<h1>Welcome</h1><b><%= name %></b>
+    erb '<h1>Welcome</h1><b><%= name %></b>'
 This is similar to what you find in other frameworks, like rails.  So what I'll do is iterate over the three templates I want available and define methods for each:
 
     {'erb': Tilt::ErubisTemplate,
@@ -73,7 +75,7 @@ Now I can use `haml :index` or `haml "%h1 Test\n%hr\n%p Partials are working, hu
 
 Pretty cool, huh? Now go crazy and build a fully fleshed out app with different routes and partials!
 
-######[Wondering how to deploy this app onto the internet? Next Lesson ->](/lesson/4)
+###### [Wondering how to deploy this app onto the internet? Next Lesson ->](/lesson/4)
 - - -
 Sources:  
 <a href="http://planetruby.github.io/gems/tilt.html" target="_blank">http://planetruby.github.io/gems/tilt.html</a>

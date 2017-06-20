@@ -64,7 +64,7 @@ class Rye
   # Updated
   # Instead of always serving a block with default I make it
   # Bring me back to my root page. Prevents there from being
-  # an infinite amount of valid urls that my app with respond
+  # an infinite amount of valid urls that my app will respond
   # 200 to.
   def default
     lambda { res.redirect('/', 301) }
@@ -101,8 +101,7 @@ class Rye
       layout = args[0].fetch(:layout, :layout) # if no layout specified, default to 'layout' file
       if layout
         args[0].merge!(layout: nil) # once a layout has been chosen stop looking
-        # layout is always render in haml and we pass
-        # it the inner child partial that it will yield
+        # layout is always rendered in haml and we pass it the inner child partial that it will yield to
         func = __method__
         haml(layout.to_sym, *args) { send(func, text, *args) }
       else

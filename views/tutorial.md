@@ -1,4 +1,4 @@
-###Lesson 1
+### Lesson 1
 
 I'll be going step by step through how the ruby micro-framework <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> works using the simplest example I can think of:
 
@@ -9,7 +9,7 @@ I'll be going step by step through how the ruby micro-framework <a href="https:/
       end
     }
 
-Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. Save the above code in the  `/sample` folder of the repo as `simple.ru`, then you should be able to run it with `rackup simple.ru`. Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> in your browser to see what it does.
+Grab the <a href="https://github.com/chneukirchen/rum" target="_blank">rum repo from github</a>. Save the above code in the  `/sample` folder of the repo as `simple.ru`, then you should be able to run it with `rackup simple.ru` in your terminal. Go to <a href="http://localhost:9292" target="_blank">http://localhost:9292</a> in your browser to see what it does.
 
 The following lessons contain alot of condensed knowledge in them. Don't be afraid to re read them over and over until you get a full grasp of what's going. Feel free to <a href="/about" target="_blank">reach out to me</a> if you have something you can't figure out!
 - - -
@@ -29,9 +29,9 @@ Here we pass our app to rack. In the end all rack wants from us is i. an **objec
 
 If we really want to show off we could implement this simple rum app as a single line: 
 `run Proc.new { |env| [200, {'Content-Type' => 'text/html'}, ['Hello, World!']] }`
-but the point of rum is too allow us to respond to many different situations vs. just serving a single response every time.
+but the point of rum is to allow us to respond to many different situations vs. just serving a single response every time.
 
-`Rum.new` executes our `:initialize` method:
+`Rum.new` executes the `:initialize` method:
 
     def initialize(&blk)
       @blk = blk
@@ -67,7 +67,7 @@ Rum makes a <a href="http://ruby-doc.org/core-2.4.0/Object.html#method-i-dup" ta
       }.call(env)
     end
 
-`env` is holding all the <a href="http://www.rubydoc.info/github/rack/rack/master/file/SPEC#The_Environment" target="_blank">environment variables</a> that rack provides us, we take a copy as it may be modified elsewhere. We use `Rack::Request` and `Rack::Response` as convenient interfaces to work with rack. `@matched` will become a flag to track if we have found an appropriate route for the incoming request.  `catch(:rum_run_next_app)` is an error handling block that rum provides for one of it's helper methods `:run`, we'll talk about in a later tutorial. For now we are interested in what happens in the block:
+`env` is holding all the <a href="http://www.rubydoc.info/github/rack/rack/master/file/SPEC#The_Environment" target="_blank">environment variables</a> that rack provides us, we take a copy as it may be modified elsewhere. We use `Rack::Request` and `Rack::Response` as convenient interfaces to work with rack. `@matched` will become a flag to track if we have found an appropriate route for the incoming request.  `catch(:rum_run_next_app)` is an error handling block that rum provides for one of it's helper methods `:run`, we'll talk about it in a later tutorial. For now we are interested in what happens in the block:
    
     instance_eval(&@blk)
     @res.status = 404  unless @matched || !@res.empty?
@@ -89,7 +89,7 @@ First up is:
     end
 The method takes two parameters, the last being a block. The *first* parameter actually grabs all values passed in and puts them into a single array which we can reference with `arg`. Entering the method, the first line checks our `@matched` variable but that is still false.  Next we make copies of some env variables as again they will be altered. 
 
-Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return }` we now traverse into the block that we passed in. `*arg` in this case was `default`:
+Hitting the `yield *arg.map { |a| a == true || (a != false && a.call) || return }` we now traverse into the block that we passed in. `*arg` in this case it was `default`:
     
     def default
       true
@@ -139,7 +139,7 @@ A quick summary of things to take away from this code review:
  2. splat (*) can be used to group parameters into an array
  3. creating rack apps is as simple as having an object with `:call(env)` method that returns a 3 element array!
 
-######[Interested in seeing a more complex example? Next Lesson ->](/lesson/2)
+###### [Interested in seeing a more complex example? Next Lesson ->](/lesson/2)
 - - -
 Sources:  
 <a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  

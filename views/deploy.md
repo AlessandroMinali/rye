@@ -1,4 +1,4 @@
-###Lesson 4
+### Lesson 4
 
 Deploying pure racks apps is straight forward and rewarding. I'll be hand holding you through deploying this for **FREE** on heroku.
 
@@ -30,7 +30,7 @@ Let's assume this is the rum app you want to deploy:
       }
 Save that into a file called `config.ru`. Try running it with `rackup config.ru` to double check. If it fails, makes sure `rum.rb` is in the right place or change the `require` call in your app.
 
-- 7: Create a file called `Gemfile` in the root of your app, no extension  
+- 7: Create a file called `Gemfile` in the root of your app, no extension.  
 This will contain all gems you need for your app to run. In this case the gemfile can just look like this:
 
       source 'https://rubygems.org'
@@ -55,7 +55,7 @@ If it's not working, double check everything is in the right place in your direc
 
 - 10: You are already done! If you setup everything up properly your browser should have already opened up to show you your app! Sweet!
 
-######[One last lesson ->](/lesson/5)
+###### [One last lesson ->](/lesson/5)
 - - -
 Sources:  
 <a href="https://devcenter.heroku.com/articles/rack" target="_blank">https://devcenter.heroku.com/articles/rack</a>

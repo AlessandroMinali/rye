@@ -1,4 +1,4 @@
-###Lesson 2
+### Lesson 2
 
 In the <a href="/lesson/1" target="_blank">previous tutorial</a> I introduced the micro-framework <a href="https://github.com/chneukirchen/rum" target="_blank">rum</a> and how it works as a <a href="http://rack.github.io" target="_blank">rack</a> app. In this example we will be looking at a more complex app. This will take us through more of the functionality that the framework provides us. The lessons learnt from this basic framework can be applied when looking at more complex ones such as <a href="http://www.sinatrarb.com" target="_blank">sinatra</a> and <a href="https://rubyonrails.org" target="_blank">rails</a>, which are rack apps themselves. Here is the code we will be breaking down:
 
@@ -148,7 +148,7 @@ which simply queries the **Rack::Response** object to see if the user is making 
     def segment
       path("[^\\/]+")
     end
-which is just a specific `:path` call, and we already know how those work. Needless to say after putting all these into the `*arg ` array the first line of `:on` kicks us out since `@matched` has been set to `true`. None of the lambdas or the nested block are evaluated.
+which is just a specific `:path` call, and we already know how those work. Needless to say after putting all these into the `*arg ` array the first line of `:on` kicks us out since `@matched` has been already set to `true`. None of the lambdas or the nested block are evaluated.
 
 The next line has a single call to the `:also` method:
 
@@ -174,7 +174,7 @@ Hopefully you now have a feel of how the rum router works in deciding on what to
 
 Now that you are confident with the rum framework try building a little personal webpage! Customize the routes you want to have and make your own custom html pages to show on each one!
 
-######[Want to add custom pages to your rum app? Next lesson ->](/lesson/3)
+###### [Want to add custom pages to your rum app? Next lesson ->](/lesson/3)
 - - -
 Sources:  
 <a href="https://github.com/chneukirchen/rum" target="_blank">https://github.com/chneukirchen/rum</a>  
